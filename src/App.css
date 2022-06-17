@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .App-logo {
@@ -35,4 +37,21 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.user-inputs{
+  display: flex;
+  flex-direction: column;
+}
+
+hr {
+  border: 0;
+  width: 100%;               
+  background-color:black;
+  height: 1px;
+}
+
+.top-form{
+  display: flex;
+  justify-content: space-evenly;
 }
