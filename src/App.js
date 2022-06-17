@@ -15,9 +15,6 @@ function App() {
   const [movieFormColor, setMovieFormColor] = useState('');
   const [filterInput, setFilterInput] = useState('');
 
-  console.table('all', allMovies);
-  console.table('filtered', filteredMovies);
-
   useEffect(() => {
     setFilteredMovies(allMovies);
     setFilterInput('');
