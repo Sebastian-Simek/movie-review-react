@@ -1,8 +1,9 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import MovieForm from './MovieForm';
 import Movie from './Movie';
 import MovieList from './MovieList';
+
 
 
 function App() {
@@ -12,7 +13,23 @@ function App() {
   const [movieFormDirector, setMovieFormDirector] = useState('');
   const [movieFormTitle, setMovieFormTitle] = useState(''); 
   const [movieFormColor, setMovieFormColor] = useState('');
+  const [filterInput, setFilterInput] = useState('');
 
+  console.table('all', allMovies);
+  console.table('filtered', filteredMovies);
+
+  useEffect(() => {
+    setFilteredMovies(allMovies);
+    setFilterInput('');
+  }, [allMovies]);
+
+  function handleFilter(filterInput) {
+    const updatedMovies = allMovies.filter(movie => movie.title.includes(filterInput));
+    setFilterInput(filterInput);
+
+    setFilteredMovies(updatedMovies);
+  }
+ 
   // I HAVE NO IDEA WHY THIS WORKS!!!!!!!
   function handleMovieDelete(title) {
     const index = allMovies.findIndex(movie => movie.title === title);
@@ -56,7 +73,10 @@ function App() {
       </section>
       <hr/>
       <section className='bottom-display'>
-        <MovieList movies={allMovies} handleMovieDelete={handleMovieDelete}/>
+        <div>
+          Filter: <input value={filterInput} onChange={e => handleFilter(e.target.value)}/>
+        </div>
+        <MovieList movies={filteredMovies} handleMovieDelete={handleMovieDelete}/>
       </section>
       <footer>Sebastian Simek 2022</footer>
     </div>
