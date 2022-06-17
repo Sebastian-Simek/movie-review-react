@@ -13,7 +13,12 @@ function App() {
   const [movieFormTitle, setMovieFormTitle] = useState(''); 
   const [movieFormColor, setMovieFormColor] = useState('');
 
-  console.log(allMovies);
+  // I HAVE NO IDEA WHY THIS WORKS!!!!!!!
+  function handleMovieDelete(title) {
+    const index = allMovies.findIndex(movie => movie.title === title);
+    allMovies.splice(index, 1);
+    setAllMovies([...allMovies]);
+  }
 
   function handleMovieSubmit(e) {
     e.preventDefault();
@@ -51,7 +56,7 @@ function App() {
       </section>
       <hr/>
       <section className='bottom-display'>
-        <MovieList movies={allMovies}/>
+        <MovieList movies={allMovies} handleMovieDelete={handleMovieDelete}/>
       </section>
       <footer>Sebastian Simek 2022</footer>
     </div>
