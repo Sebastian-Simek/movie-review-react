@@ -2,6 +2,7 @@ import './App.css';
 import { useState } from 'react';
 import MovieForm from './MovieForm';
 import Movie from './Movie';
+import MovieList from './MovieList';
 
 
 function App() {
@@ -12,7 +13,18 @@ function App() {
   const [movieFormTitle, setMovieFormTitle] = useState(''); 
   const [movieFormColor, setMovieFormColor] = useState('');
 
-  console.log(movieFormYear);
+  console.log(allMovies);
+
+  function handleMovieSubmit(e) {
+    e.preventDefault();
+    const newMovie = {
+      year: movieFormYear,
+      director: movieFormDirector,
+      title: movieFormTitle,
+      color: movieFormColor  
+    };
+    setAllMovies([...allMovies, newMovie]);
+  }
 
   return (
     <div className="App">
@@ -25,6 +37,8 @@ function App() {
           movieFormDirector={movieFormDirector}
           movieFormTitle={movieFormTitle}
           setMovieFormYear={setMovieFormYear}
+          handleMovieSubmit={handleMovieSubmit}
+          movieFormYear={movieFormYear}
         />
         <Movie
           movie={{
@@ -36,8 +50,8 @@ function App() {
         />
       </section>
       <hr/>
-      <section>
-        {/* <Movie /> */}
+      <section className='bottom-display'>
+        <MovieList movies={allMovies}/>
       </section>
       <footer>Sebastian Simek 2022</footer>
     </div>
